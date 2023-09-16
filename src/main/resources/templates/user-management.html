@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User Management</title>
+</head>
+<body>
+<h1>User Management</h1>
+<!-- Hiển thị danh sách người dùng -->
+<h2>User List</h2>
+<table id="userTable">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.name}"></td>
+        <td th:text="${user.email}"></td>
+        <td><a th:href="@{/delete/{id}(id=${user.id})}">Delete</a></td>
+    </tr>
+    </tbody>
+</table>
+
+<!-- Tìm kiếm người dùng -->
+<h2>Search User</h2>
+<form id="searchForm" th:action="@{/search}" method="get">
+    <input type="text" id="searchInput" name="name" placeholder="Enter name">
+    <button type="submit">Search</button>
+    <button><a href="./detail.html">Xem chi tiết</a></button>
+</form>
+
+<!-- Xóa người dùng -->
+<h2>Delete User</h2>
+<form id="deleteForm" th:action="@{/users/delete}" method="post">
+    <input type="number" id="deleteInput" name="id" placeholder="Enter User ID">
+    <button type="submit">Delete</button>
+</form>
+<button><a href="./create.html">Tạo ueser mới</a></button>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Sự kiện click nút Delete
+        $(document).on('click', '.deleteButton', function() {
+            var userId = $(this).data('id'); // Lấy id của user
+            // Gửi yêu cầu POST tới "/users/delete" với dữ liệu id của user
+            $.post("/users/delete", { id: userId }, function() {
+                location.reload(); // Tải lại trang sau khi xóa
+            });
+        });
+    });
+</script>
+</body>
+</html>

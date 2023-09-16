@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create</title>
+</head>
+<body>
+<h2>Create New User</h2>
+<form id="createUserForm" th:action="@{/create}" method="post">
+    <input type="text" id="nameInput" name="name" placeholder="Enter name">
+    <input type="email" id="emailInput" name="email" placeholder="Enter email">
+    <input type="text" id="phoneInput" name="phone" placeholder="Enter phone">
+
+    <select id="addressSelect" name="address">
+        <option value="">Select address</option>
+        <option th:each="address : ${addresses}" th:value="${address}" th:text="${address}"></option>
+    </select>
+
+    <input type="text" id="avatarInput" name="avatar" placeholder="Enter avatar">
+    <input type="password" id="passwordInput" name="password" placeholder="Enter password">
+
+    <button type="submit">Create</button>
+</form>
+</body>
+</html>

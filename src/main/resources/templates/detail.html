@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Detail</title>
+</head>
+<body>
+<!-- user-details.html -->
+<h2>User Details</h2>
+<p>Name: <span th:text="${user.name}"></span></p>
+<p>Email: <span th:text="${user.email}"></span></p>
+<p>Phone: <span th:text="${user.phone}"></span></p>
+<p>Address: <span th:text="${user.address}"></span></p>
+
+<h2>Update User</h2>
+<form id="updateUserForm" th:action="@{/users/{id}/update(id=${user.id})}" method="post">
+  <input type="text" id="nameInput" name="name" th:value="${user.name}">
+  <input type="text" id="phoneInput" name="phone" th:value="${user.phone}">
+  <input type="text" id="addressInput" name="address" th:value="${user.address}">
+  <button type="submit">Update</button>
+</form>
+
+<h2>Change Password</h2>
+<form id="updatePasswordForm" th:action="@{/users/{id}/update-password(id=${user.id})}" method="post">
+  <input type="password" id="passwordInput" name="password" placeholder="Enter new password">
+  <button type="submit">Change Password</button>
+</form>
+
+<h2>Forgot Password</h2>
+<form id="forgotPasswordForm" th:action="@{/users/{id}/forgot-password(id=${user.id})}" method="post">
+  <button type="submit">Forgot Password</button>
+</form>
+</body>
+</html>
